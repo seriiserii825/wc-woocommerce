@@ -1,34 +1,136 @@
-<?php
-/**
- * The template for displaying the footer
- *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package wc-woocommerce
- */
-
-?>
-
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'wc-woocommerce' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'wc-woocommerce' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'wc-woocommerce' ), 'wc-woocommerce', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
-
+<div class="footer">
+    <div class="container">
+        <div class="footer_top">
+            <div class="span_of_4">
+                <div class="col-md-3 span1_of_4">
+                    <h4>Shop</h4>
+                    <ul class="f_nav">
+                        <li>
+                            <a href="#">new arrivals</a>
+                        </li>
+                        <li>
+                            <a href="#">men</a>
+                        </li>
+                        <li>
+                            <a href="#">women</a>
+                        </li>
+                        <li>
+                            <a href="#">accessories</a>
+                        </li>
+                        <li>
+                            <a href="#">kids</a>
+                        </li>
+                        <li>
+                            <a href="#">brands</a>
+                        </li>
+                        <li>
+                            <a href="#">trends</a>
+                        </li>
+                        <li>
+                            <a href="#">sale</a>
+                        </li>
+                        <li>
+                            <a href="#">style videos</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 span1_of_4">
+                    <h4>help</h4>
+                    <ul class="f_nav">
+                        <li>
+                            <a href="#">frequently asked questions</a>
+                        </li>
+                        <li>
+                            <a href="#">men</a>
+                        </li>
+                        <li>
+                            <a href="#">women</a>
+                        </li>
+                        <li>
+                            <a href="#">accessories</a>
+                        </li>
+                        <li>
+                            <a href="#">kids</a>
+                        </li>
+                        <li>
+                            <a href="#">brands</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 span1_of_4">
+                    <h4>account</h4>
+                    <ul class="f_nav">
+                        <li>
+                            <a href="account.html">login</a>
+                        </li>
+                        <li>
+                            <a href="register.html">create an account</a>
+                        </li>
+                        <li>
+                            <a href="#">create wishlist</a>
+                        </li>
+                        <li>
+                            <a href="checkout.html">my shopping bag</a>
+                        </li>
+                        <li>
+                            <a href="#">brands</a>
+                        </li>
+                        <li>
+                            <a href="#">create wishlist</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 span1_of_4">
+                    <h4>popular</h4>
+                    <ul class="f_nav">
+                        <li>
+                            <a href="#">new arrivals</a>
+                        </li>
+                        <li>
+                            <a href="#">men</a>
+                        </li>
+                        <li>
+                            <a href="#">women</a>
+                        </li>
+                        <li>
+                            <a href="#">accessories</a>
+                        </li>
+                        <li>
+                            <a href="#">kids</a>
+                        </li>
+                        <li>
+                            <a href="#">brands</a>
+                        </li>
+                        <li>
+                            <a href="#">trends</a>
+                        </li>
+                        <li>
+                            <a href="#">sale</a>
+                        </li>
+                        <li>
+                            <a href="#">style videos</a>
+                        </li>
+                        <li>
+                            <a href="#">login</a>
+                        </li>
+                        <li>
+                            <a href="#">brands</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="cards text-center">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/cards.jpg" alt=""/>
+        </div>
+        <div class="copyright text-center">
+            <p>© 2015 Eshop. All Rights Reserved | Design by
+                <a href="http://w3layouts.com"> W3layouts</a>
+            </p>
+        </div>
+    </div>
+</div>
 <?php wp_footer(); ?>
-
 </body>
 </html>

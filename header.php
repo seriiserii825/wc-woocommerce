@@ -1,59 +1,58 @@
-<?php
-/**
- * The header for our theme
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package wc-woocommerce
- */
-
-?>
-<!doctype html>
-<html <?php language_attributes(); ?>>
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Eshop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
 
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		} </script>
 	<?php wp_head(); ?>
 </head>
-
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'wc-woocommerce' ); ?></a>
-
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$wc_woocommerce_description = get_bloginfo( 'description', 'display' );
-			if ( $wc_woocommerce_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $wc_woocommerce_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'wc-woocommerce' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+<body>
+<!-- header-section-starts -->
+<div class="header">
+    <div class="header-top-strip">
+        <div class="container">
+            <div class="header-top-left">
+                <ul>
+                    <li>
+                        <a href="account.html">
+                            <span class="glyphicon glyphicon-user"> </span>
+                            Login
+                        </a>
+                    </li>
+                    <li>
+                        <a href="register.html">
+                            <span class="glyphicon glyphicon-lock"> </span>
+                            Create an Account
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header-right">
+                <div class="cart box_1">
+                    <a href="checkout.html">
+                        <h3>
+                            <span class="simpleCart_total"> $0.00 </span>
+                            (
+                            <span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>
+                            )
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/bag.png" alt="">
+                        </h3>
+                    </a>
+                    <p>
+                        <a href="javascript:;" class="simpleCart_empty">Empty cart</a>
+                    </p>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
