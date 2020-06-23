@@ -7,7 +7,7 @@ if ( ! defined( '_S_VERSION' ) ) {
 require_once __DIR__.'/inc/bs-setup.php';
 require_once __DIR__ . '/inc/bs-widgets.php';
 require_once __DIR__ . '/inc/bs-styles.php';
-
+require_once __DIR__ . '/inc/wc-add-hooks.php';
 ///**
 // * Implement the Custom Header feature.
 // */

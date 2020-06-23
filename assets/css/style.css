@@ -3868,3 +3868,10 @@ p.right {
 		top: 13%;
 	}
 }
+.product__img {
+	height: 460px;
+	overflow: hidden;
+}
+.onsale {
+	position: absolute;
+}
