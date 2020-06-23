@@ -5,7 +5,7 @@
       <paths name="hostland">
         <serverdata>
           <mappings>
-            <mapping deploy="/host1670806.hostland.pro/htdocs/wc-woocommerce/wp-content/themes/wc-woocommerce" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/wp-content/themes/wc-woocommerce" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
