@@ -3872,6 +3872,11 @@ p.right {
 	height: 460px;
 	overflow: hidden;
 }
-.onsale {
-	position: absolute;
+.offer--top {
+	top: 2%;
+	right: 32%;
+	bottom: initial;
+}
+.offer--top small {
+	color: white;
 }
