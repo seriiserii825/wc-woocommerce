@@ -1,3 +1,9 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+?>
 <div class="main-header-top">
     <div class="logo">
         <h1>
@@ -33,5 +39,5 @@
             <div class="sandwitch__line sandwitch__line--bottom"></div>
         </div>
     </div>
-	<?php wpm_language_switcher('select'); ?>
+<!--	--><?php //wpm_language_switcher('select'); ?>
 </div>

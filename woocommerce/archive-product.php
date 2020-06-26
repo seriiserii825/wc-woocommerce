@@ -69,6 +69,7 @@
             </div>
             <div class="clearfix"></div>
         </div>
+<!--        --><?php //do_action('woocommerce_before_main_content'); ?>
 		<?php woocommerce_output_content_wrapper(); ?>
 		<?php do_action( 'woocommerce_archive_description' ); ?>
 		<?php $products = new WP_Query( [
@@ -76,7 +77,9 @@
 			'posts_per_page' => 9
 		] ); ?>
 
-		<?php woocommerce_product_loop_start(); ?>
+<!--        --><?php //do_action( 'woocommerce_before_shop_loop' ); ?>
+
+        <?php woocommerce_product_loop_start(); ?>
 		<?php if ( $products->have_posts() ): ?>
 			<?php while ( $products->have_posts() ): ?>
 				<?php $products->the_post(); ?>
@@ -87,6 +90,8 @@
 		<?php woocommerce_product_loop_end(); ?>
         <div class="clearfix"></div>
 		<?php woocommerce_output_content_wrapper_end(); ?>
+
+<!--        --><?php //do_action( 'woocommerce_after_shop_loop' ); ?>
     </div>
 
 </div>

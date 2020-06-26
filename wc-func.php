@@ -7,6 +7,9 @@
  * @package  WooCommerce\Functions
  * @version  2.5.0
  */
+
+use Automattic\Jetpack\Constants;
+
 defined( 'ABSPATH' ) || exit;
 /**
  * Handle redirects before content is output - hooked into template_redirect so is_page works.
@@ -67,7 +70,7 @@ add_action( 'template_redirect', 'wc_template_redirect' );
  * @since  2.3.10
  */
 function wc_send_frame_options_header() {
-	if ( is_checkout() || is_account_page() ) {
+	if ( ( is_checkout() || is_account_page() ) && ! is_customize_preview() ) {
 		send_frame_options_header();
 	}
 }
@@ -102,9 +105,9 @@ add_action( 'template_redirect', 'wc_prevent_adjacent_posts_rel_link_wp_head' );
  */
 function wc_gallery_noscript() {
 	?>
-	<noscript>
-		<style>.woocommerce-product-gallery { opacity: 1 !important; }</style>
-	</noscript>
+    <noscript>
+        <style>.woocommerce-product-gallery { opacity: 1 !important; }</style>
+    </noscript>
 	<?php
 }
 add_action( 'wp_head', 'wc_gallery_noscript' );
@@ -222,12 +225,13 @@ function woocommerce_product_loop() {
  * @return string
  */
 function wc_generator_tag( $gen, $type ) {
+	$version = Constants::get_constant( 'WC_VERSION' );
 	switch ( $type ) {
 		case 'html':
-			$gen .= "\n" . '<meta name="generator" content="WooCommerce ' . esc_attr( WC_VERSION ) . '">';
+			$gen .= "\n" . '<meta name="generator" content="WooCommerce ' . esc_attr( $version ) . '">';
 			break;
 		case 'xhtml':
-			$gen .= "\n" . '<meta name="generator" content="WooCommerce ' . esc_attr( WC_VERSION ) . '" />';
+			$gen .= "\n" . '<meta name="generator" content="WooCommerce ' . esc_attr( $version ) . '" />';
 			break;
 	}
 	return $gen;
@@ -273,11 +277,11 @@ function wc_body_class( $classes ) {
  */
 function wc_no_js() {
 	?>
-	<script type="text/javascript">
+    <script type="text/javascript">
 		var c = document.body.className;
 		c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
 		document.body.className = c;
-	</script>
+    </script>
 	<?php
 }
 /**
@@ -817,7 +821,7 @@ if ( ! function_exists( 'woocommerce_content' ) ) {
 
 			<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 
-				<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
+                <h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
 
 			<?php endif; ?>
 
@@ -978,14 +982,14 @@ if ( ! function_exists( 'woocommerce_template_loop_category_title' ) ) {
 	 */
 	function woocommerce_template_loop_category_title( $category ) {
 		?>
-		<h2 class="woocommerce-loop-category__title">
+        <h2 class="woocommerce-loop-category__title">
 			<?php
 			echo esc_html( $category->name );
 			if ( $category->count > 0 ) {
 				echo apply_filters( 'woocommerce_subcategory_count_html', ' <mark class="count">(' . esc_html( $category->count ) . ')</mark>', $category ); // WPCS: XSS ok.
 			}
 			?>
-		</h2>
+        </h2>
 		<?php
 	}
 }
@@ -1001,7 +1005,7 @@ if ( ! function_exists( 'woocommerce_template_loop_product_link_open' ) ) {
 }
 if ( ! function_exists( 'woocommerce_template_loop_product_link_close' ) ) {
 	/**
-	 * Insert the opening anchor tag for products in the loop.
+	 * Insert the closing anchor tag for products in the loop.
 	 */
 	function woocommerce_template_loop_product_link_close() {
 		echo '</a>';
@@ -1431,6 +1435,7 @@ if ( ! function_exists( 'woocommerce_quantity_input' ) ) {
 			'pattern'      => apply_filters( 'woocommerce_quantity_input_pattern', has_filter( 'woocommerce_stock_amount', 'intval' ) ? '[0-9]*' : '' ),
 			'inputmode'    => apply_filters( 'woocommerce_quantity_input_inputmode', has_filter( 'woocommerce_stock_amount', 'intval' ) ? 'numeric' : '' ),
 			'product_name' => $product ? $product->get_title() : '',
+			'placeholder'  => apply_filters( 'woocommerce_quantity_input_placeholder', '', $product ),
 		);
 		$args = apply_filters( 'woocommerce_quantity_input_args', wp_parse_args( $args, $defaults ), $product );
 		// Apply sanity to min/max args - min cannot be lower than 0.
@@ -1658,11 +1663,13 @@ if ( ! function_exists( 'woocommerce_upsell_display' ) ) {
 		$args = apply_filters( 'woocommerce_upsell_display_args', array(
 			'posts_per_page' => $limit,
 			'orderby'        => $orderby,
+			'order'          => $order,
 			'columns'        => $columns,
 		) );
 		wc_set_loop_prop( 'name', 'up-sells' );
 		wc_set_loop_prop( 'columns', apply_filters( 'woocommerce_upsells_columns', isset( $args['columns'] ) ? $args['columns'] : $columns ) );
 		$orderby = apply_filters( 'woocommerce_upsells_orderby', isset( $args['orderby'] ) ? $args['orderby'] : $orderby );
+		$order   = apply_filters( 'woocommerce_upsells_order', isset( $args['order'] ) ? $args['order'] : $order );
 		$limit   = apply_filters( 'woocommerce_upsells_total', isset( $args['posts_per_page'] ) ? $args['posts_per_page'] : $limit );
 		// Get visible upsells then sort them at random, then limit result set.
 		$upsells = wc_products_array_orderby( array_filter( array_map( 'wc_get_product', $product->get_upsell_ids() ), 'wc_products_array_filter_visible' ), $orderby, $order );
@@ -2237,12 +2244,12 @@ if ( ! function_exists( 'woocommerce_form_field' ) ) {
 					$field .= '<strong>' . current( array_values( $countries ) ) . '</strong>';
 					$field .= '<input type="hidden" name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" value="' . current( array_keys( $countries ) ) . '" ' . implode( ' ', $custom_attributes ) . ' class="country_to_state" readonly="readonly" />';
 				} else {
-					$field = '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="country_to_state country_select ' . esc_attr( implode( ' ', $args['input_class'] ) ) . '" ' . implode( ' ', $custom_attributes ) . '><option value="">' . esc_html__( 'Select a country&hellip;', 'woocommerce' ) . '</option>';
+					$field = '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="country_to_state country_select ' . esc_attr( implode( ' ', $args['input_class'] ) ) . '" ' . implode( ' ', $custom_attributes ) . '><option value="">' . esc_html__( 'Select a country / region&hellip;', 'woocommerce' ) . '</option>';
 					foreach ( $countries as $ckey => $cvalue ) {
-						$field .= '<option value="' . esc_attr( $ckey ) . '" ' . selected( $value, $ckey, false ) . '>' . $cvalue . '</option>';
+						$field .= '<option value="' . esc_attr( $ckey ) . '" ' . selected( $value, $ckey, false ) . '>' . esc_html( $cvalue ) . '</option>';
 					}
 					$field .= '</select>';
-					$field .= '<noscript><button type="submit" name="woocommerce_checkout_update_totals" value="' . esc_attr__( 'Update country', 'woocommerce' ) . '">' . esc_html__( 'Update country', 'woocommerce' ) . '</button></noscript>';
+					$field .= '<noscript><button type="submit" name="woocommerce_checkout_update_totals" value="' . esc_attr__( 'Update country / region', 'woocommerce' ) . '">' . esc_html__( 'Update country / region', 'woocommerce' ) . '</button></noscript>';
 				}
 				break;
 			case 'state':
@@ -2255,7 +2262,7 @@ if ( ! function_exists( 'woocommerce_form_field' ) ) {
 					$field .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="state_select ' . esc_attr( implode( ' ', $args['input_class'] ) ) . '" ' . implode( ' ', $custom_attributes ) . ' data-placeholder="' . esc_attr( $args['placeholder'] ? $args['placeholder'] : esc_html__( 'Select an option&hellip;', 'woocommerce' ) ) . '"  data-input-classes="' . esc_attr( implode( ' ', $args['input_class'] ) ) . '">
 						<option value="">' . esc_html__( 'Select an option&hellip;', 'woocommerce' ) . '</option>';
 					foreach ( $states as $ckey => $cvalue ) {
-						$field .= '<option value="' . esc_attr( $ckey ) . '" ' . selected( $value, $ckey, false ) . '>' . $cvalue . '</option>';
+						$field .= '<option value="' . esc_attr( $ckey ) . '" ' . selected( $value, $ckey, false ) . '>' . esc_html( $cvalue ) . '</option>';
 					}
 					$field .= '</select>';
 				} else {
@@ -2295,7 +2302,7 @@ if ( ! function_exists( 'woocommerce_form_field' ) ) {
 							}
 							$custom_attributes[] = 'data-allow_clear="true"';
 						}
-						$options .= '<option value="' . esc_attr( $option_key ) . '" ' . selected( $value, $option_key, false ) . '>' . esc_attr( $option_text ) . '</option>';
+						$options .= '<option value="' . esc_attr( $option_key ) . '" ' . selected( $value, $option_key, false ) . '>' . esc_html( $option_text ) . '</option>';
 					}
 					$field .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="select ' . esc_attr( implode( ' ', $args['input_class'] ) ) . '" ' . implode( ' ', $custom_attributes ) . ' data-placeholder="' . esc_attr( $args['placeholder'] ) . '">
 							' . $options . '
@@ -2307,7 +2314,7 @@ if ( ! function_exists( 'woocommerce_form_field' ) ) {
 				if ( ! empty( $args['options'] ) ) {
 					foreach ( $args['options'] as $option_key => $option_text ) {
 						$field .= '<input type="radio" class="input-radio ' . esc_attr( implode( ' ', $args['input_class'] ) ) . '" value="' . esc_attr( $option_key ) . '" name="' . esc_attr( $key ) . '" ' . implode( ' ', $custom_attributes ) . ' id="' . esc_attr( $args['id'] ) . '_' . esc_attr( $option_key ) . '"' . checked( $value, $option_key, false ) . ' />';
-						$field .= '<label for="' . esc_attr( $args['id'] ) . '_' . esc_attr( $option_key ) . '" class="radio ' . implode( ' ', $args['label_class'] ) . '">' . $option_text . '</label>';
+						$field .= '<label for="' . esc_attr( $args['id'] ) . '_' . esc_attr( $option_key ) . '" class="radio ' . implode( ' ', $args['label_class'] ) . '">' . esc_html( $option_text ) . '</label>';
 					}
 				}
 				break;
@@ -3019,4 +3026,26 @@ if ( ! function_exists( 'woocommerce_product_reviews_tab' ) ) {
 	function woocommerce_product_reviews_tab() {
 		wc_deprecated_function( 'woocommerce_product_reviews_tab', '2.4' );
 	}
+}
+/**
+ * Display pay buttons HTML.
+ *
+ * @since 3.9.0
+ */
+function wc_get_pay_buttons() {
+	$supported_gateways = array();
+	$available_gateways = WC()->payment_gateways()->get_available_payment_gateways();
+	foreach ( $available_gateways as $gateway ) {
+		if ( $gateway->supports( 'pay_button' ) ) {
+			$supported_gateways[] = $gateway->get_pay_button_id();
+		}
+	}
+	if ( ! $supported_gateways ) {
+		return;
+	}
+	echo '<div class="woocommerce-pay-buttons">';
+	foreach ( $supported_gateways as $pay_button_id ) {
+		echo sprintf( '<div class="woocommerce-pay-button__%1$s %1$s" id="%1$s"></div>', esc_attr( $pay_button_id ) );
+	}
+	echo '</div>';
 }
