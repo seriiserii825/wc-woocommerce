@@ -39,5 +39,6 @@ if (!defined('ABSPATH')) {
             <div class="sandwitch__line sandwitch__line--bottom"></div>
         </div>
     </div>
+
 <!--	--><?php //wpm_language_switcher('select'); ?>
 </div>
