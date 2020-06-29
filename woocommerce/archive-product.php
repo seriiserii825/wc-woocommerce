@@ -2,7 +2,6 @@
 <!-- header-section-ends -->
 <div class="banner-top">
     <div class="container">
-		<?php ?>
 		<?php require_once __DIR__ . '/../inc/navigation.php'; ?>
     </div>
 </div>

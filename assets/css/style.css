@@ -3718,7 +3718,7 @@ p.right {
 	display: block;
 }
 
-.main-menu > li.current-menu-item a {
+.main-menu > li.current-menu-item > a {
 	border: 1px solid #816263;
 }
 
@@ -3733,7 +3733,9 @@ p.right {
 }
 
 .main-menu .sub-menu a {
+	display: block;
 	padding: 10px;
+	border: none;
 }
 
 .main-menu a {
@@ -3879,4 +3881,7 @@ p.right {
 }
 .offer--top small {
 	color: white;
+}
+.inner-banner {
+	padding: 15px;
 }
