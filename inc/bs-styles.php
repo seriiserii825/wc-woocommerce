@@ -7,6 +7,7 @@ function wc_woocommerce_scripts() {
 	wp_style_add_data( 'wc-woocommerce-style', 'rtl', 'replace' );
 
 	wp_enqueue_style('wc-woocommerce-bootstrap-css', get_template_directory_uri().'/assets/css/bootstrap.css');
+	wp_enqueue_style( 'wc-woocommerce-component-css', get_template_directory_uri() . '/assets/css/component.css' );
 	wp_enqueue_style( 'wc-woocommerce-style-css', get_template_directory_uri() . '/assets/css/style.css' );
 	wp_enqueue_style( 'wc-woocommerce-flexslider-css', get_template_directory_uri() . '/assets/css/flexslider.css' );
 
@@ -14,6 +15,8 @@ function wc_woocommerce_scripts() {
 	wp_enqueue_script( 'wc-woocommerce-simplecart-js', get_template_directory_uri() . '/assets/js/simpleCart.min.js', [ 'jquery' ], null, true );
 	wp_enqueue_script( 'wc-woocommerce-responsinveslides-js', get_template_directory_uri() . '/assets/js/responsiveslides.min.js', [ 'jquery' ], null, true );
 	wp_enqueue_script( 'wc-woocommerce-flexisel-js', get_template_directory_uri() . '/assets/js/jquery.flexisel.js', [ 'jquery' ], null, true );
+	wp_enqueue_script( 'wc-woocommerce-cbpViewModeSwitch-js', get_template_directory_uri() . '/assets/js/cbpViewModeSwitch.js', [ 'jquery' ], null, true );
+	wp_enqueue_script( 'wc-woocommerce-classie-js', get_template_directory_uri() . '/assets/js/classie.js', [ 'jquery' ], null, true );
 	wp_enqueue_script( 'wc-woocommerce-main-js', get_template_directory_uri() . '/assets/js/main.js', [ 'jquery' ], null, true );
 	wp_deregister_script( 'wc-add-to-cart' );
 	wp_enqueue_script( 'wc-add-to-cart', get_template_directory_uri() . '/woocommerce/js/add-to-cart.js', array(

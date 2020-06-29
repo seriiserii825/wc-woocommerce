@@ -176,7 +176,7 @@ jQuery(function ($) {
 				// $button.after(' <a href="' + wc_add_to_cart_params.cart_url + '" class="added_to_cart wc-forward" title="' +
 				// 	wc_add_to_cart_params.i18n_view_cart + '">' + wc_add_to_cart_params.i18n_view_cart + '</a>');
 				$button.attr('href', wc_add_to_cart_params.cart_url);
-				$button.attr('class', 'added_to_cart wc-forward');
+				$button.attr('class', 'added_to_cart wc-forward cbp-vm-icon cbp-vm-add item_add');
 				$button.text(wc_add_to_cart_params.i18n_view_cart);
 			}
 

@@ -3728,6 +3728,7 @@ p.right {
 	left: 10px;
 	display: none;
 	padding: 15px 0;
+	background-color: white;
 	border: 1px solid #816263;
 	z-index: 100;
 }

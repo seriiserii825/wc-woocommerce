@@ -94,3 +94,15 @@ function my_revisions_to_keep( $revisions ) {
 
 add_filter( 'wp_revisions_to_keep', 'my_revisions_to_keep' );
 
+function getPrice($product){
+	global $woocommerce;
+	$currency      = get_woocommerce_currency_symbol();
+	$price_regular = $product->get_regular_price();
+//	$price_sale    = $product->get_sale_price();
+	$price         = $product->get_price();
+	if ( $price_regular ) {
+		return $price_regular . $currency . ' - <span class="line-through">' . $price . $currency . '</span>';
+	} else {
+		return $price . $currency;
+	}
+}
