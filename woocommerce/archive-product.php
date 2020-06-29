@@ -69,7 +69,7 @@
             </div>
             <div class="clearfix"></div>
         </div>
-<!--        --><?php //do_action('woocommerce_before_main_content'); ?>
+        <!--        --><?php //do_action('woocommerce_before_main_content'); ?>
 		<?php woocommerce_output_content_wrapper(); ?>
 		<?php do_action( 'woocommerce_archive_description' ); ?>
 		<?php $products = new WP_Query( [
@@ -77,21 +77,21 @@
 			'posts_per_page' => 9
 		] ); ?>
 
-<!--        --><?php //do_action( 'woocommerce_before_shop_loop' ); ?>
+        <!--        --><?php //do_action( 'woocommerce_before_shop_loop' ); ?>
 
-        <?php woocommerce_product_loop_start(); ?>
+		<?php woocommerce_product_loop_start(); ?>
 		<?php if ( $products->have_posts() ): ?>
 			<?php while ( $products->have_posts() ): ?>
 				<?php $products->the_post(); ?>
 				<?php wc_get_template_part( 'content', 'product' ); ?>
-				<?php endwhile; ?>
+			<?php endwhile; ?>
 			<?php wp_reset_postdata(); ?>
 		<?php endif; ?>
 		<?php woocommerce_product_loop_end(); ?>
         <div class="clearfix"></div>
 		<?php woocommerce_output_content_wrapper_end(); ?>
 
-<!--        --><?php //do_action( 'woocommerce_after_shop_loop' ); ?>
+        <!--        --><?php //do_action( 'woocommerce_after_shop_loop' ); ?>
     </div>
 
 </div>
@@ -101,81 +101,54 @@
     <div class="container">
         <h3 class="like text-center">Featured Collection</h3>
         <ul id="flexiselDemo3">
-            <li>
-                <a href="single.html">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/l1.jpg" class="img-responsive"
-                         alt=""/>
-                </a>
-                <div class="product liked-product simpleCart_shelfItem">
-                    <a class="like_name" href="single.html">perfectly simple</a>
-                    <p>
-                        <a class="item_add" href="#">
-                            <i></i>
-                            <span class=" item_price">$759</span>
+
+			<?php
+			$featured = new WP_Query( [
+				'post_type'      => 'product',
+				'posts_per_page' => - 1,
+				'tax_query'      => array(
+					array(
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => 'featured',
+					),
+				),
+				//                'post__in' => wc_get_featured_product_ids(),
+			] ); ?>
+			<?php if ( $featured->have_posts() ): ?>
+				<?php while ( $featured->have_posts() ): ?>
+					<?php $featured->the_post(); ?>
+                    <li>
+                        <a href="<?php the_permalink(); ?>">
+                            <img src="<?php echo get_the_post_thumbnail_url( get_the_ID(), 'full' ); ?>"
+                                 class="img-responsive"
+                                 alt=""/>
                         </a>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <a href="single.html">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/l2.jpg" class="img-responsive"
-                         alt=""/>
-                </a>
-                <div class="product liked-product simpleCart_shelfItem">
-                    <a class="like_name" href="single.html">praising pain</a>
-                    <p>
-                        <a class="item_add" href="#">
-                            <i></i>
-                            <span class=" item_price">$699</span>
-                        </a>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <a href="single.html">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/l3.jpg" class="img-responsive"
-                         alt=""/>
-                </a>
-                <div class="product liked-product simpleCart_shelfItem">
-                    <a class="like_name" href="single.html">Neque porro</a>
-                    <p>
-                        <a class="item_add" href="#">
-                            <i></i>
-                            <span class=" item_price">$329</span>
-                        </a>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <a href="single.html">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/l4.jpg" class="img-responsive"
-                         alt=""/>
-                </a>
-                <div class="product liked-product simpleCart_shelfItem">
-                    <a class="like_name" href="single.html">equal blame</a>
-                    <p>
-                        <a class="item_add" href="#">
-                            <i></i>
-                            <span class=" item_price">$499</span>
-                        </a>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <a href="single.html">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/l5.jpg" class="img-responsive"
-                         alt=""/>
-                </a>
-                <div class="product liked-product simpleCart_shelfItem">
-                    <a class="like_name" href="single.html">perfectly simple</a>
-                    <p>
-                        <a class="item_add" href="#">
-                            <i></i>
-                            <span class=" item_price">$649</span>
-                        </a>
-                    </p>
-                </div>
-            </li>
+                        <div class="product liked-product simpleCart_shelfItem">
+							<?php global $product;
+							$class = implode( ' ', array_filter( array(
+								'button',
+								'product_type_' . $product->get_type(),
+								$product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
+								$product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ? 'ajax_add_to_cart' : '',
+							) ) );
+                            ?>
+
+                            <a class="like_name <?php echo $class; ?>" data-product_sku="<?php echo $product->get_sku(); ?>" data-quantity="1"
+                               href="<?php echo $product->add_to_cart_url(); ?>"><?php the_title(); ?></a>
+                            <p>
+                                <?php if($price_html = $product->get_price_html()): ?>
+                                <a class="item_add" href="#">
+                                    <i></i>
+                                    <span class=" item_price"><?php echo $price_html; ?></span>
+                                </a>
+                                <?php endif; ?>
+                            </p>
+                        </div>
+                    </li>
+				<?php endwhile; ?>
+				<?php wp_reset_postdata(); ?>
+			<?php endif; ?>
         </ul>
     </div>
 </div>
