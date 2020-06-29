@@ -4,13 +4,13 @@ if (!defined('ABSPATH')) {
 }
 function wc_woocommerce_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'wc-woocommerce' ),
-		'id'            => 'sidebar-1',
+		'name'          => esc_html__( 'Language', 'wc-woocommerce' ),
+		'id'            => 'sidebar-language',
 		'description'   => esc_html__( 'Add widgets here.', 'wc-woocommerce' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'before_widget' => '',
+		'after_widget'  => '',
+		'before_title'  => '',
+		'after_title'   => '',
 	) );
 }
 add_action( 'widgets_init', 'wc_woocommerce_widgets_init' );

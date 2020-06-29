@@ -31,6 +31,10 @@ if (!defined('ABSPATH')) {
 		'depth'           => 0,
 		'walker'          => '',
 	] ); ?>
+    <?php if(!dynamic_sidebar('sidebar-language')): ?>
+    <h4>Language widget</h4>
+    <?php endif; ?>
+
 
     <div class="sandwitch-wrap" id="js-sandwitch-wrap">
         <div class="sandwitch">

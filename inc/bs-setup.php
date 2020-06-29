@@ -12,6 +12,7 @@ if ( ! function_exists( 'wc_woocommerce_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'menu-top' => esc_html__( 'Primary', 'wc-woocommerce' ),
+			'menu-sidebar' => esc_html__( 'Sidebar menu', 'wc-woocommerce' ),
 		) );
 		add_theme_support( 'html5', array(
 			'search-form',

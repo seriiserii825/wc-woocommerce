@@ -12,101 +12,7 @@ get_header();
 
 <div class="container">
     <div class="products-page">
-        <div class="products">
-            <div class="product-listy">
-                <h2>our Products</h2>
-                <ul class="product-list">
-                    <li>
-                        <a href="">New Products</a>
-                    </li>
-                    <li>
-                        <a href="">Old Products</a>
-                    </li>
-                    <li>
-                        <a href="">T-shirts</a>
-                    </li>
-                    <li>
-                        <a href="">pants</a>
-                    </li>
-                    <li>
-                        <a href="">Dress</a>
-                    </li>
-                    <li>
-                        <a href="">Shorts</a>
-                    </li>
-                    <li>
-                        <a href="#">Shirts</a>
-                    </li>
-                    <li>
-                        <a href="register.html">Register</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="latest-bis">
-                <img src="images/l4.jpg" class="img-responsive" alt=""/>
-                <div class="offer">
-                    <p>40%</p>
-                    <small>Top Offer</small>
-                </div>
-            </div>
-            <div class="tags">
-                <h4 class="tag_head">Tags Widget</h4>
-                <ul class="tags_links">
-                    <li>
-                        <a href="#">Kitesurf</a>
-                    </li>
-                    <li>
-                        <a href="#">Super</a>
-                    </li>
-                    <li>
-                        <a href="#">Duper</a>
-                    </li>
-                    <li>
-                        <a href="#">Theme</a>
-                    </li>
-                    <li>
-                        <a href="#">Men</a>
-                    </li>
-                    <li>
-                        <a href="#">Women</a>
-                    </li>
-                    <li>
-                        <a href="#">Equipment</a>
-                    </li>
-                    <li>
-                        <a href="#">Best</a>
-                    </li>
-                    <li>
-                        <a href="#">Accessories</a>
-                    </li>
-                    <li>
-                        <a href="#">Men</a>
-                    </li>
-                    <li>
-                        <a href="#">Apparel</a>
-                    </li>
-                    <li>
-                        <a href="#">Super</a>
-                    </li>
-                    <li>
-                        <a href="#">Duper</a>
-                    </li>
-                    <li>
-                        <a href="#">Theme</a>
-                    </li>
-                    <li>
-                        <a href="#">Responsive</a>
-                    </li>
-                    <li>
-                        <a href="#">Women</a>
-                    </li>
-                    <li>
-                        <a href="#">Equipment</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
+        <?php get_sidebar(); ?>
         <div class="new-product">
             <div class="new-product-top">
                 <ul class="product-top-list">
@@ -448,5 +354,7 @@ get_header();
     </div>
     <div class="clearfix"></div>
 </div>
+
+<?php wc_get_template_part( 'templates/over', 'products' ); ?>
 
 <?php get_footer(); ?>

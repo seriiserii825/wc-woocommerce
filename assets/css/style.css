@@ -3885,3 +3885,7 @@ p.right {
 .inner-banner {
 	padding: 15px;
 }
+.line-through {
+	text-decoration: line-through;
+	opacity: .6;
+}
