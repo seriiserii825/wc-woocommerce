@@ -132,17 +132,18 @@
 								$product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
 								$product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ? 'ajax_add_to_cart' : '',
 							) ) );
-                            ?>
+							?>
 
-                            <a class="like_name <?php echo $class; ?>" data-product_sku="<?php echo $product->get_sku(); ?>" data-quantity="1"
+                            <a class="like_name <?php echo $class; ?>"
+                               data-product_sku="<?php echo $product->get_sku(); ?>" data-quantity="1"
                                href="<?php echo $product->add_to_cart_url(); ?>"><?php the_title(); ?></a>
                             <p>
-                                <?php if($price_html = $product->get_price_html()): ?>
-                                <a class="item_add" href="#">
-                                    <i></i>
-                                    <span class=" item_price"><?php echo $price_html; ?></span>
-                                </a>
-                                <?php endif; ?>
+								<?php if ( $price_html = $product->get_price_html() ): ?>
+                                    <a class="item_add" href="#">
+                                        <i></i>
+                                        <span class=" item_price"><?php echo $price_html; ?></span>
+                                    </a>
+								<?php endif; ?>
                             </p>
                         </div>
                     </li>
@@ -156,13 +157,11 @@
 <div class="news-letter">
     <div class="container">
         <div class="join">
-            <h6>JOIN OUR MAILING LIST</h6>
+            <h6>Поиск</h6>
             <div class="sub-left-right">
-                <form>
-                    <input type="text" value="Enter Your Email Here" onfocus="this.value = '';"
-                           onblur="if (this.value == '') {this.value = 'Enter Your Email Here';}"/>
-                    <input type="submit" value="SUBSCRIBE"/>
-                </form>
+	            <?php if ( function_exists( 'aws_get_search_form' ) ) {
+		            aws_get_search_form();
+	            } ?>
             </div>
             <div class="clearfix"></div>
         </div>

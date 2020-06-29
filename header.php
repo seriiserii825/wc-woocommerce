@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html <?php language_attributes(); ?>>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -14,7 +14,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		} </script>
 	<?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class(); ?>>
 <!-- header-section-starts -->
 <div class="header">
     <div class="header-top-strip">
