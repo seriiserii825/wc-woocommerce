@@ -12,25 +12,16 @@ get_header();
 
 <div class="container">
     <div class="products-page">
-        <?php get_sidebar(); ?>
+		<?php get_sidebar(); ?>
         <div class="new-product">
 
-	        <?php do_action( 'woocommerce_before_main_content'); ?>
-	        <?php remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 ); ?>
+			<?php do_action( 'woocommerce_before_main_content' ); ?>
+			<?php remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 ); ?>
 
             <div class="mens-toolbar">
 
-	            <?php do_action( 'woocommerce_before_shop_loop' ); ?>
+				<?php do_action( 'woocommerce_before_shop_loop' ); ?>
 
-                <ul class="women_pagenation">
-                    <li>Page:</li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                </ul>
                 <div class="clearfix"></div>
             </div>
             <div id="cbp-vm" class="cbp-vm-switcher cbp-vm-view-grid">
@@ -58,21 +49,25 @@ get_header();
                 </div>
                 <div class="clearfix"></div>
                 <ul>
-                    <?php if ( have_posts() ): ?>
-                    	<?php while ( have_posts() ): ?>
-                    		<?php the_post(); ?>
-                            <?php global $product; ?>
-                            <?php wc_get_template_part('content', 'product-cat'); ?>
-	                    <?php endwhile; ?>
-                    	<?php wp_reset_postdata(); ?>
-                    <?php else: ?>
-                    <h3>No products found</h3>
-                    <?php endif; ?>
+					<?php if ( have_posts() ): ?>
+						<?php while ( have_posts() ): ?>
+							<?php the_post(); ?>
+							<?php global $product; ?>
+							<?php wc_get_template_part( 'content', 'product-cat' ); ?>
+						<?php endwhile; ?>
+						<?php wp_reset_postdata(); ?>
+					<?php else: ?>
+                        <h3>No products found</h3>
+					<?php endif; ?>
                 </ul>
+				<?php do_action( 'woocommerce_after_shop_loop' ); ?>
+<!--				--><?php //woocommerce_pagination(); ?>
+<!--                --><?php //wc_get_template( 'loop/pagination.php' ); ?>
             </div>
         </div>
         <div class="clearfix"></div>
     </div>
+
     <div class="clearfix"></div>
 </div>
 

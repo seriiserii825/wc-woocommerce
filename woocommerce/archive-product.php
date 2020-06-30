@@ -90,21 +90,21 @@
         <div class="clearfix"></div>
 		<?php woocommerce_output_content_wrapper_end(); ?>
 
-        <!--        --><?php //do_action( 'woocommerce_after_shop_loop' ); ?>
+		<?php do_action( 'woocommerce_after_shop_loop' ); ?>
     </div>
 
 </div>
 
-<?php wc_get_template_part('templates/over', 'products'); ?>
+<?php wc_get_template_part( 'templates/over', 'products' ); ?>
 
 <div class="news-letter">
     <div class="container">
         <div class="join">
             <h6>Поиск</h6>
             <div class="sub-left-right">
-	            <?php if ( function_exists( 'aws_get_search_form' ) ) {
-		            aws_get_search_form();
-	            } ?>
+				<?php if ( function_exists( 'aws_get_search_form' ) ) {
+					aws_get_search_form();
+				} ?>
             </div>
             <div class="clearfix"></div>
         </div>
