@@ -19,25 +19,9 @@ get_header();
 	        <?php remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 ); ?>
 
             <div class="mens-toolbar">
-                <div class="sort">
-                    <div class="sort-by">
-                        <label>Sort By</label>
-                        <select>
-                            <option value="">
-                                Position
-                            </option>
-                            <option value="">
-                                Name
-                            </option>
-                            <option value="">
-                                Price
-                            </option>
-                        </select>
-                        <a href="">
-                            <img src="images/arrow2.gif" alt="" class="v-middle">
-                        </a>
-                    </div>
-                </div>
+
+	            <?php do_action( 'woocommerce_before_shop_loop' ); ?>
+
                 <ul class="women_pagenation">
                     <li>Page:</li>
                     <li class="active">

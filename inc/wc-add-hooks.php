@@ -42,6 +42,7 @@ if ( ! is_shop() ) {
 	function category_woocommerce_template_loop_product_link_close() {
 		echo '';
 	}
+	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 }
 add_filter( 'woocommerce_breadcrumb_defaults', 'changeBreadcrumb' );
 function changeBreadcrumb() {
